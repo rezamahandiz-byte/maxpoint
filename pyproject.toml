@@ -1,4 +1,4 @@
-[project]
+﻿[project]
 name = "maxpoint"
 version = "0.1.0"
 description = "MAXPOINT — study assistant + time manager + academic life analyst (personal app)."
@@ -32,3 +32,6 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = ["core", "ui", "services"]
 package-dir = { "" = "src" }
+
+[tool.flet.app]
+path = "src"
