@@ -1,0 +1,25 @@
+[project]
+name = "maxpoint"
+version = "0.1.0"
+description = "MAXPOINT - Personal Study & Life Intelligence"
+requires-python = ">=3.12"
+dependencies = [
+    "flet>=0.86.0",
+    "flet-secure-storage",
+    "flet-android-notifications",
+    "flet-charts",
+    "httpx",
+]
+
+[tool.flet]
+product = "MAXPOINT"
+org = "com.maxpoint"
+bundle_id = "com.maxpoint.app"
+build_number = 1
+
+[tool.flet.app]
+path = "src"
+
+[tool.flet.android.permission]
+"android.permission.POST_NOTIFICATIONS" = true
+"android.permission.INTERNET" = true

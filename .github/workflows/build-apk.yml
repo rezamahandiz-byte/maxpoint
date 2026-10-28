@@ -37,6 +37,7 @@ jobs:
         run: |
           flet build apk \
             --yes \
+            --module-name main \
             --android-signing-key-store keystore.jks \
             --android-signing-key-alias maxpoint \
             --split-per-abi
