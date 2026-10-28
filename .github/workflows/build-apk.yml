@@ -10,15 +10,40 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build APK
-        id: build
-        uses: flet-dev/flet-build-action@v1
+      - uses: actions/setup-python@v5
         with:
-          target: apk
+          python-version: '3.12'
 
-      - name: Upload APK
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Flet
+        run: |
+          python -m pip install --upgrade pip
+          pip install "flet[all]"
+
+      - name: Generate temporary keystore
+        run: |
+          keytool -genkey -v -keystore keystore.jks \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -alias maxpoint -storepass maxpoint123 -keypass maxpoint123 \
+            -dname "CN=MAXPOINT, OU=Personal, O=Personal, L=NA, S=NA, C=IR"
+
+      - name: Build APK
+        env:
+          FLET_ANDROID_SIGNING_KEY_STORE_PASSWORD: maxpoint123
+        run: |
+          flet build apk \
+            --yes \
+            --android-signing-key-store keystore.jks \
+            --android-signing-key-alias maxpoint \
+            --split-per-abi
+
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: maxpoint-apk
-          path: ${{ steps.build.outputs.archive-path }}
+          path: build/**/*.apk
           if-no-files-found: error
