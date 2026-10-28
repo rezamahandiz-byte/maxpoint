@@ -1,0 +1,12 @@
+﻿venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.jks
+*.keystore
+build/
+dist/
+.DS_Store
+*.log
+.env
