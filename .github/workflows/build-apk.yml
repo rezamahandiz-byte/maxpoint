@@ -1,4 +1,4 @@
-﻿name: Build MAXPOINT APK
+name: Build MAXPOINT APK
 on:
   push:
     branches: [ main ]
